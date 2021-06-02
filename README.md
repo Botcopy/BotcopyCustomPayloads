@@ -1,42 +1,42 @@
-# Botcopy Response Payload Format for Dialogflow CX
+# Botcopy Response Payload Format
 
 ### Content
 
 [Overview](#overview)
-​
+
 [Actions in Detail](#actions)
-​
+
 [Response Payload Details](#response-payload-structure-details)
-​
+
 - [Text Responses](#text-responses)
 - [Suggestions](#suggestions)
 - [Basic Cards](#basic-cards)
 - [Carousels](#carousels)
 - [Lists](#lists)
-​
+
 ## Overview
-​
+
 Botcopy responses are designed to be flexible in their role and this is reflected in the payload structure. Components in the payload have an action field that dictates their behavior in the Botcopy chat when the component is selected by an end user. It allows multiple response types with different actions to be grouped together.
-​
+
 Examples:
-​
+
 - Suggestions can be used to send messages or links
 - Card Buttons can send messages or links
 - Carousels can contain more than one type of action
   - Link cards act as browse carousel cards
   - Message cards act as regular selection key carousel cards
   - Button cards have buttons, that each have their own individual actions
-​
+
 ### Actions
-​
+
 [message](#message) and [link](#link) are used for Suggestions, Cards, Carousel Items, and List Items.
-​
+
 Card and Carousels can also use a [button](#button) action. Each button has its own individual action.
-​
+
 Only one action should be assigned to each payload element. In case of conflicting actions, Botcopy priorities message > link > button.
-​
+
 #### message
-​
+
 ```
 {
   "action": {
@@ -47,14 +47,14 @@ Only one action should be assigned to each payload element. In case of conflicti
   }
 }
 ```
-​
+
 Sends a message to the bot on selection
-​
+
 - command (optional): the event name or training phrase sent to the bot. Defaults to title if not provided
 - type: either 'event' or 'training'. This corresponds to an event name or training phrase for an intent.
-​
+
 #### link
-​
+
 ```
 {
   "action": {
@@ -65,14 +65,14 @@ Sends a message to the bot on selection
   }
 }
 ```
-​
+
 Sends the user to a destination url within the a new tab, or a Botcopy webview
-​
+
 - url: the destination url
 - target (optional): new tab or webview. Defaults to a Botcopy webview in the chat if not defined.
-​
+
 #### button
-​
+
 ```
 {
   "action": {
@@ -99,30 +99,30 @@ Sends the user to a destination url within the a new tab, or a Botcopy webview
   }
 }
 ```
-​
+
 An array of buttons, each with an action of their own. exclusively used for Cards or Carousels.
-​
+
 - title: the title of the button
 - action: defines the behavior of the button. Must be exclusively a single action
   - [message](#message)
   - [link](#link)
-​
+
 ---
-​
+
 ## Response Payload Structure Details
-​
+
 Each custom payload should contian a `botcopy` array with your desired rich responses.
-​
+
 Default CX text responses will render alongside your payload if they are provided.
-​
+
 Custom Rich Responses will be rendered in the chat in their arrayed order.
-​
+
 ### Text Responses
-​
+
 An array of text responses.
-​
+
 textToSpeech, displayText, and ssml fields handle different aspects of the message.
-​
+
 ```
 {
   "botcopy": [
@@ -138,19 +138,19 @@ textToSpeech, displayText, and ssml fields handle different aspects of the messa
   ]
 }
 ```
-​
+
 **text**
-​
+
 - displayText - the message displayed in the chat.
 - ssml (optional) - SSML format text for the phrase spoken by a bot.
 - textToSpeech (optional) - the phrase spoken by the bot. Takes priority over SSML. If both are provided in the payload, textToSpeech is used for the audio file.
-​
+
 ---
-​
+
 ### Suggestions
-​
+
 Suggestions prompt users with a clickable button after a series of responses. A suggestion can either continue the conversation with a **message** action, or send the user to an external link with a **link** action.
-​
+
 ```
 {
   "botcopy": [
@@ -179,22 +179,22 @@ Suggestions prompt users with a clickable button after a series of responses. A 
   ]
 }
 ```
-​
+
 **suggestion**
-​
+
 - title: the label displayed in the suggestion chip to the end user
 - action: defines the behavior of the suggestion. Must be exclusively a single action
   - [message](#message)
   - [link](#link)
-​
+
 ---
-​
+
 ### Basic Cards
-​
+
 Basic cards have a title, subtitle, and body containing information. Image media includes, but is not limited to, images, gifs, embedded youtube links.
-​
+
 Cards can also use a [button](#button) action, which is displayed in this example.
-​
+
 ```
 {
   "botcopy": [
@@ -234,9 +234,9 @@ Cards can also use a [button](#button) action, which is displayed in this exampl
   ]
 }
 ```
-​
+
 **card**
-​
+
 - title: title for the card
 - image (optional): object containing media info
   - url: link to media
@@ -247,13 +247,13 @@ Cards can also use a [button](#button) action, which is displayed in this exampl
   - [message](#message)
   - [link](#link)
   - [button](#button)
-​
+
 ---
-​
+
 ### Carousels
-​
+
 Carousels are a collection of cards. Each carousel item can have an action of either [message](#message), [link](#link), or [button](#button).
-​
+
 ```
 {
   "botcopy": [
@@ -293,9 +293,9 @@ Carousels are a collection of cards. Each carousel item can have an action of ei
   ]
 }
 ```
-​
+
 **carousel**
-​
+
 - title: title for the card
 - image (optional): object containing media info
   - url: link to media
@@ -306,13 +306,13 @@ Carousels are a collection of cards. Each carousel item can have an action of ei
   - [message](#message)
   - [link](#link)
   - [button](#button)
-​
+
 ---
-​
+
 ### Lists
-​
+
 Lists are another way to visualize an assortment of data. Lists do not use a button action.
-​
+
 ```
 {
   "botcopy": [
@@ -356,9 +356,9 @@ Lists are another way to visualize an assortment of data. Lists do not use a but
   ]
 }
 ```
-​
+
 **list**
-​
+
 - title: list title shown in header
 - items: array of list items
   - image (optional)
