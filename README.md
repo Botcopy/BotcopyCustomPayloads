@@ -25,13 +25,12 @@ Examples:
 - Carousels can contain more than one type of action
   - Link cards act as browse carousel cards
   - Message cards act as regular selection key carousel cards
-  - Button cards have buttons, that each have their own individual actions
 
 ### Actions
 
 [message](#message) and [link](#link) are used for Suggestions, Cards, Carousel Items, and List Items.
 
-Card and Carousels can also use a [button](#button) action. Each button has its own individual action.
+Card can also use a [button](#button) action. Each button has its own individual action.
 
 Only one action should be assigned to each payload element. In case of conflicting actions, Botcopy priorities message > link > button.
 
@@ -100,7 +99,7 @@ Sends the user to a destination url within the a new tab, or a Botcopy webview
 }
 ```
 
-An array of buttons, each with an action of their own. exclusively used for Cards or Carousels.
+An array of buttons, each with an action of their own. exclusively used for Cards.
 
 - title: the title of the button
 - action: defines the behavior of the button. Must be exclusively a single action
@@ -116,6 +115,8 @@ Each custom payload should contian a `botcopy` array with your desired rich resp
 Default CX text responses will render alongside your payload if they are provided.
 
 Custom Rich Responses will be rendered in the chat in their arrayed order.
+
+To add a custom payload to a CX response, select the 'Custom Payload' fulfillment option.
 
 ### Text Responses
 
