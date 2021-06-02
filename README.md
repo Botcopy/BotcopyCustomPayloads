@@ -1,7 +1,7 @@
-# Botcopy Response Payload Format
-​
+# Botcopy Response Payload Format for Dialogflow CX
+
 ### Content
-​
+
 [Overview](#overview)
 ​
 [Actions in Detail](#actions)
