@@ -1,5 +1,4 @@
 # Botcopy Response Payload Format for Dialogflow CX
-#### More platforms coming soon!
 
 ### Content
 
