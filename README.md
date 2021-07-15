@@ -391,7 +391,7 @@ Fields have a max length of 256 characters. At least one field is required for t
               {
                 "label": "Email Address",
                 "placeholder": "matt@botcopy.com",
-                "parameter": "bcFormEmail",
+                "parameter": "email",
                 "type": "email",
                 "required": true,
                 "pattern": "string",
@@ -400,7 +400,7 @@ Fields have a max length of 256 characters. At least one field is required for t
               {
                 "label": "Phone Number",
                 "placeholder": "(214) 555-1423",
-                "parameter": "Dialogflow parameter",
+                "parameter": "phoneNumber",
                 "type": "tel",
                 "required": false,
                 "pattern": "string"
