@@ -13,6 +13,7 @@
 - [Basic Cards](#basic-cards)
 - [Carousels](#carousels)
 - [Lists](#lists)
+- [Forms](#forms)
 
 ## Overview
 
@@ -370,3 +371,69 @@ Lists are another way to visualize an assortment of data. Lists do not use a but
   - action
     - [message](#message)
     - [link](#link)
+
+---
+
+### Forms
+
+Forms have a title and fields waiting for user input. Field inputs are assigned as a parameter on `botcopy-form-context` for Dialogflow ES or as a session parameter for Dialogflow CX.
+
+Forms exclusively use a [message](#message) action, which is the training phrase or event used to continue the conversation when the form is filled.
+
+Fields have a max length of 256 characters. At least one field is required for the component to render.
+
+```
+{
+  "botcopy": [
+    {
+      "form": {
+          "fields": [
+              {
+                "label": "Email Address",
+                "placeholder": "matt@botcopy.com",
+                "parameter": "bcFormEmail",
+                "type": "email",
+                "required": true,
+                "pattern": "string",
+                "error": "This field is required."
+              },
+              {
+                "label": "Phone Number",
+                "placeholder": "(214) 555-1423",
+                "parameter": "Dialogflow parameter",
+                "type": "tel",
+                "required": false,
+                "pattern": "string"
+              }
+             ],
+          "style": "message" OR "wall",
+          "title": "Contact Information",
+          "subtitle": "Thank you for your business!",
+          "force": true,
+          "action": {
+              "message": {
+                "command": "Pricing",
+                "type": "training"
+                }
+            }
+       }
+    }
+  ]
+}
+```
+
+**form**
+
+- title: title for the form
+- subtitle: subtitle for the form
+- fields: array containing fields
+- force (optional): defaults to false. if true, the wall component does not have a cancel button. this does not apply to message style forms.
+- style: style of the form component (message or wall)
+- fields: array of objects
+  - label: text input label
+  - placeholder: input placeholder
+  - parameter: name of dialogflow parameter to assign input to
+  - error: text shown if a required field is not filled
+  - type (optional): type of the input field
+  - required (optional): required to submit form
+  - pattern (optional): regex patterns
