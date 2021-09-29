@@ -395,7 +395,8 @@ Fields have a max length of 256 characters. At least one field is required for t
                 "type": "email",
                 "required": true,
                 "pattern": "string",
-                "error": "This field is required."
+                "error": "This field is required.",
+                "expose": true
               },
               {
                 "label": "Phone Number",
@@ -403,7 +404,8 @@ Fields have a max length of 256 characters. At least one field is required for t
                 "parameter": "phoneNumber",
                 "type": "tel",
                 "required": false,
-                "pattern": "string"
+                "pattern": "string",
+                "expose": false
               }
              ],
           "style": "message" OR "wall",
@@ -435,5 +437,6 @@ Fields have a max length of 256 characters. At least one field is required for t
   - parameter: name of dialogflow parameter to assign input to
   - error: text shown if a required field is not filled
   - type (optional): type of the input field
-  - required (optional): required to submit form
+  - required (optional): field required to submit form
   - pattern (optional): regex patterns
+  - expose (optional): add the parameter name and field value to the `botcopy-form-submitted` window event
